@@ -167,12 +167,12 @@ data PoolMetadata = PoolMetadata
 -- We need this more specific
 -- instance since API returns
 -- empty object if there's no metadata
-instance {-# OVERLAPS #-} ToJSON (Maybe PoolMetadata) where
+instance {-# OVERLAPPING #-} ToJSON (Maybe PoolMetadata) where
   toJSON Nothing   = object mempty
   toJSON (Just pm) = toJSON pm
   toEncoding Nothing   = pairs mempty
   toEncoding (Just pm) = toEncoding pm
-instance {-# OVERLAPS #-} FromJSON (Maybe PoolMetadata) where
+instance {-# OVERLAPPING #-} FromJSON (Maybe PoolMetadata) where
   parseJSON x | x == object [] = pure Nothing
   parseJSON x = Just <$> parseJSON x
 
